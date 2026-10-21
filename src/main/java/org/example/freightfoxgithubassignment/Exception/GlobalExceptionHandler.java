@@ -49,6 +49,11 @@ public class GlobalExceptionHandler {
         return build(HttpStatus.BAD_GATEWAY, "GitHub is unavailable right now. Please try again later.");
     }
 
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<Map<String, Object>> invalidResponse(IllegalStateException e) {
+        return build(HttpStatus.BAD_GATEWAY, e.getMessage());
+    }
+
     private ResponseEntity<Map<String, Object>> build(HttpStatus status, String message) {
         return ResponseEntity.status(status).body(Map.of(
                 "timestamp", Instant.now().toString(),

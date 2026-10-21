@@ -68,6 +68,11 @@ public class GithubRepositoryService {
                 .body(JsonNode.class);
 
         List<GithubRepository> repos = new ArrayList<>();
+
+        if (root == null || !root.has("items")) {
+            throw new IllegalStateException("Received an invalid response from GitHub");
+        }
+
         for (JsonNode item : root.path("items")) {
             repos.add(toEntity(item));
         }
