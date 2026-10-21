@@ -18,8 +18,8 @@ The application supports repository search, upsert operations, sorting, filterin
 | Search GitHub repositories | POST | `/api/github/search` |
 | Retrieve saved repositories | GET | [`/api/github/repositories`](https://livegithubreposearch.onrender.com/api/github/repositories) |
 | Filter saved repositories | GET | `/api/github/repositories?language=Java&minStars=100&sort=stars` |
-Swagger UI (API documentation)	GET	Open Swagger UI
-H2 Console (database)	GET	Open H2 Console
+- **Swagger UI:** [Open API Documentation](https://livegithubreposearch.onrender.com/swagger-ui/index.html)
+- **H2 Console:** [Open Database Console](https://livegithubreposearch.onrender.com/h2-console)
 
 The search endpoint requires a POST request with a JSON body. The GET request to `/api/github/search` returns a short usage message with HTTP `405 Method Not Allowed`.
 
