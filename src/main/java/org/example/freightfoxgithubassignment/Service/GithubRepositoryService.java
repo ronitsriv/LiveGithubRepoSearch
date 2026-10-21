@@ -3,6 +3,7 @@ package org.example.freightfoxgithubassignment.Service;
 import jakarta.persistence.criteria.Predicate;
 import org.example.freightfoxgithubassignment.Entity.GithubRepository;
 import org.example.freightfoxgithubassignment.Repository.GithubRepoRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+
+
+
 @Service
 public class GithubRepositoryService {
+
+    @Value("${github.token:}")
+    private String githubToken = "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";
+
 
     // API sort value -> entity field name
     private static final Map<String, String> SORT_FIELDS = Map.of(
@@ -64,6 +72,7 @@ public class GithubRepositoryService {
         JsonNode root = restClient.get()
                 .uri("https://api.github.com/search/repositories?q={q}&sort={sort}&per_page=20", q, sortBy)
                 .header("Accept", "application/vnd.github+json")
+                .headers(h -> { if (!githubToken.isBlank()) h.setBearerAuth(githubToken); })
                 .retrieve()
                 .body(JsonNode.class);
 
